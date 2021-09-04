@@ -11,7 +11,7 @@ use tree::binary_tree::BinaryTree;
 
 fn main() {
     let tree = BinaryTree::create(vec![3, 13, 23, 2]);
-    dbg!(tree);
+    dbg!(&tree);
     // [src/main.rs:5] tree = Node {
     //     val: 13,
     //     left: Node {
@@ -29,5 +29,15 @@ fn main() {
     //         right: Nil,
     //     },
     // }
+
+    let result = tree.search(3);
+    dbg!(&result);
+    // [src/main.rs:8] &result = Some(
+    //     3,
+    // )
+
+    let result = tree.search(999);
+    dbg!(&result);
+    // [src/main.rs:11] &result = None
 }
 ```
