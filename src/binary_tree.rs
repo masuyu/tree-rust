@@ -50,6 +50,21 @@ impl BinaryTree<i32> {
             }),
         }
     }
+
+    pub fn search(&self, number: i32) -> Option<i32> {
+        match self {
+            BinaryTree::<i32>::Nil => None,
+            BinaryTree::<i32>::Node { val, left, right } => {
+                if val == &number {
+                    Some(number)
+                } else if val >= &number {
+                    left.search(number)
+                } else {
+                    right.search(number)
+                }
+            }
+        }
+    }
 }
 
 #[cfg(test)]
@@ -124,5 +139,26 @@ mod tests {
             }),
         };
         assert_eq!(expected, BinaryTree::create(vec![3, 1, 4, 2]));
+    }
+
+    #[test]
+    fn test_search() {
+        let expected = Some(3);
+        let tree = BinaryTree::create(vec![3, 1, 4, 2]);
+        assert_eq!(expected, tree.search(3));
+    }
+
+    #[test]
+    fn test_search_when_not_found() {
+        let expected = None;
+        let tree = BinaryTree::create(vec![3, 1, 4, 2]);
+        assert_eq!(expected, tree.search(7));
+    }
+
+    #[test]
+    fn test_search_when_empty_tree() {
+        let expected = None;
+        let tree = BinaryTree::create(vec![]);
+        assert_eq!(expected, tree.search(3));
     }
 }
