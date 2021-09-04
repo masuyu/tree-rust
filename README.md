@@ -7,9 +7,27 @@ Rust プログラミングの練習のため木構造を生成・操作する単
 単純な二分木を生成します。
 
 ```rust
-use tree;
+use tree::binary_tree::BinaryTree;
 
 fn main() {
-    tree::make(vec![1, 2, 3]);
+    let tree = BinaryTree::create(vec![3, 13, 23, 2]);
+    dbg!(tree);
+    // [src/main.rs:5] tree = Node {
+    //     val: 13,
+    //     left: Node {
+    //         val: 3,
+    //         left: Node {
+    //             val: 2,
+    //             left: Nil,
+    //             right: Nil,
+    //         },
+    //         right: Nil,
+    //     },
+    //     right: Node {
+    //         val: 23,
+    //         left: Nil,
+    //         right: Nil,
+    //     },
+    // }
 }
 ```
