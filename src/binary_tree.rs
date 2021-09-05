@@ -62,6 +62,18 @@ impl BinaryTree<i32> {
             None
         }
     }
+
+    pub fn insert(&mut self, number: i32) {
+        if let Some(ref mut boxed_node) = self.root {
+            boxed_node.insert(number);
+        } else {
+            self.root = Some(Box::new(Node {
+                val: number,
+                left: None,
+                right: None,
+            }))
+        }
+    }
 }
 
 impl Node<i32> {
@@ -81,6 +93,39 @@ impl Node<i32> {
                 None
             }
         }
+    }
+
+    pub fn insert(&mut self, number: i32) {
+        fn find_left_or_right(
+            node: &mut Option<Box<Node<i32>>>,
+            found_number: i32,
+        ) -> &mut Option<Box<Node<i32>>> {
+            if let Some(ref mut b) = *node {
+                if found_number < b.val {
+                    find_left_or_right(&mut b.left, found_number)
+                } else {
+                    find_left_or_right(&mut b.right, found_number)
+                }
+            } else {
+                node
+            }
+        }
+
+        if number == self.val {
+            return;
+        }
+
+        let node;
+        if number < self.val {
+            node = find_left_or_right(&mut self.left, number);
+        } else {
+            node = find_left_or_right(&mut self.right, number);
+        };
+        *node = Some(Box::new(Node {
+            val: number,
+            left: None,
+            right: None,
+        }))
     }
 }
 
