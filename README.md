@@ -49,5 +49,48 @@ fn main() {
     let result = tree.search(999);
     dbg!(&result);
     // [src/main.rs:11] &result = None
+
+    let mut tree2 = BinaryTree::create(vec![2]);
+    tree2.insert(1);
+    dbg!(&tree2);
+    // [src/main.rs:45] &tree2 = BinaryTree {
+    //     root: Some(
+    //         Node {
+    //             val: 2,
+    //             left: Some(
+    //                 Node {
+    //                     val: 1,
+    //                     left: None,
+    //                     right: None,
+    //                 },
+    //             ),
+    //             right: None,
+    //         },
+    //     ),
+    // }
+
+    tree2.insert(3);
+    dbg!(&tree2);
+    // [src/main.rs:47] &tree2 = BinaryTree {
+    //     root: Some(
+    //         Node {
+    //             val: 2,
+    //             left: Some(
+    //                 Node {
+    //                     val: 1,
+    //                     left: None,
+    //                     right: None,
+    //                 },
+    //             ),
+    //             right: Some(
+    //                 Node {
+    //                     val: 3,
+    //                     left: None,
+    //                     right: None,
+    //                 },
+    //             ),
+    //         },
+    //     ),
+    // }
 }
 ```
