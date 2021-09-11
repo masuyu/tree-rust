@@ -232,4 +232,68 @@ mod tests {
         let tree = BinaryTree::create(vec![]);
         assert_eq!(expected, tree.search(3));
     }
+
+    #[test]
+    fn test_insert_to_tree() {
+        let expected = BinaryTree {
+            root: Some(Box::new(Node {
+                val: 2,
+                left: Some(Box::new(Node {
+                    val: 1,
+                    left: None,
+                    right: None,
+                })),
+                right: None,
+            })),
+        };
+        let mut tree = BinaryTree::create(vec![2]);
+        tree.insert(1);
+        assert_eq!(expected, tree);
+
+        let expected = BinaryTree {
+            root: Some(Box::new(Node {
+                val: 2,
+                left: Some(Box::new(Node {
+                    val: 1,
+                    left: None,
+                    right: None,
+                })),
+                right: Some(Box::new(Node {
+                    val: 3,
+                    left: None,
+                    right: None,
+                })),
+            })),
+        };
+        tree.insert(3);
+        assert_eq!(expected, tree);
+    }
+
+    #[test]
+    fn test_insert_same_element_to_tree() {
+        let expected = BinaryTree {
+            root: Some(Box::new(Node {
+                val: 2,
+                left: None,
+                right: None,
+            })),
+        };
+        let mut tree = BinaryTree::create(vec![2]);
+        tree.insert(2);
+        assert_eq!(expected, tree);
+    }
+
+    #[test]
+    fn test_insert_when_empty_tree() {
+        let expected = BinaryTree {
+            root: Some(Box::new(Node {
+                val: 2,
+                left: None,
+                right: None,
+            })),
+        };
+        let mut tree = BinaryTree::create(vec![]);
+        tree.insert(2);
+        assert_eq!(expected, tree);
+    }
 }
